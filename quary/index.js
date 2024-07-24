@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
+const axios = require('axios');
 
 const app = express();
 app.use(bodyparser.json());
@@ -8,12 +9,7 @@ app.use(cors())
 
 let posts = {};
 
-app.get('/posts',(req,res)=>{
-    res.send(posts);
-});
-
-app.post('/events', (req, res)=>{
-    const {type, data} = req.body;
+const handleEvent = (type, data) =>{
     if(type === 'PostCreated'){
         const {id, title} = data;
         posts[id] = {id, title, comments:[]}
@@ -31,9 +27,24 @@ app.post('/events', (req, res)=>{
         comment.status = status;
         comment.content = content;
     }
-    console.log(posts)
+}
+
+app.get('/posts',(req,res)=>{
+    res.send(posts);
+});
+
+app.post('/events', (req, res)=>{
+    const {type, data} = req.body;
+    handleEvent(type, data);
     res.send({})
 });
 
 
-app.listen(3010, (req,res)=>{console.log('Listening on port 3010')});
+app.listen(3010, async (req,res)=>{
+    console.log('Listening on port 3010');
+    const response = await axios.get("http://localhost:3005/events");
+    for(let event of response.data){
+        console.log("Processing event: ", event.type);
+        handleEvent(event.type, event.data);
+    }
+});
