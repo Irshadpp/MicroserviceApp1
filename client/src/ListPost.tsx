@@ -5,7 +5,8 @@ import ListComment from "./ListComment";
 
 interface Post{
     id:string,
-    title:string
+    title:string,
+    comments:string[]
 }
 
 type PostsResponse = Record<string, Post>;
@@ -14,7 +15,8 @@ const ListPost: React.FC = () => {
     const [posts, setPosts] = useState<PostsResponse>({});
     const fetchPost = async() =>{
         try {
-            const res = await axios.get<PostsResponse>("http://localhost:3000/posts");
+            const res = await axios.get<PostsResponse>("http://localhost:3010/posts");
+            console.log(res.data)
             setPosts(res.data);
         } catch (error) {
             console.log(error)
@@ -34,7 +36,7 @@ const ListPost: React.FC = () => {
             >
               <h3 className="text-xl font-semibold text-gray-900">{post.title}</h3>
               <CreateComment postId={post.id}/>
-              <ListComment postId={post.id}/>
+              <ListComment comments={post.comments}/>
             </div>
           ))}
         </div>

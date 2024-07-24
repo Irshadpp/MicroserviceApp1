@@ -10,7 +10,7 @@ app.post('/events', (req,res)=>{
 
     axios.post('http://localhost:3000/events', event);
     axios.post('http://localhost:3001/events', event);
-    axios.post('http://localhost:3002/events', event);
+    axios.post('http://localhost:3010/events', event);
 
     res.send({status: "OK"})
 });
