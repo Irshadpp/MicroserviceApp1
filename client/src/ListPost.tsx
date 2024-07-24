@@ -2,11 +2,15 @@ import axios from "axios"
 import { useEffect, useState } from "react";
 import CreateComment from "./CreateComment";
 import ListComment from "./ListComment";
-
+interface Comment{
+  id: string,
+  content: string,
+  status: string
+}
 interface Post{
     id:string,
     title:string,
-    comments:string[]
+    comments:Comment[]
 }
 
 type PostsResponse = Record<string, Post>;
