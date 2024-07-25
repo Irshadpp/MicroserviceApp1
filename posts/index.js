@@ -20,7 +20,7 @@ app.post('/posts', async (req, res)=>{
     posts[id] = {
         id, title
     }
-    await axios.post('http://localhost:3005/events',{
+    await axios.post('http://event-bus-srv:3005/events',{
         type: "PostCreated",
         data:{
             id, title
@@ -37,5 +37,6 @@ app.post('/events', (req, res)=>{
 })
 
 app.listen(3000,()=>{
+    console.log("Updating with rollout..........----=====------======-----====");
     console.log("Listening on port 3000")
 })

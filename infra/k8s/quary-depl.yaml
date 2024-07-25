@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quary-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quary
+  template:
+    metadata:
+      labels:
+        app: quary
+    spec:
+      containers:
+        - name: quary
+          image: irshadpp/quary
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quary-srv
+spec:
+  selector:
+    app: quary
+  ports:
+    - name: quary
+      protocol: TCP
+      port: 3010
+      targetPort: 3010

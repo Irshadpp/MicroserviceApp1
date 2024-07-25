@@ -10,16 +10,16 @@ let events = [];
 app.post('/events', (req,res)=>{
     const event = req.body;
     events.push(event)
-    axios.post('http://localhost:3000/events', event).catch((err) => {
+    axios.post('http://posts-clusterip-srv:3000/events', event).catch((err) => {
         console.log(err.message);
       });
-    axios.post('http://localhost:3001/events', event).catch((err) => {
+    axios.post('http://comments-srv:3001/events', event).catch((err) => {
         console.log(err.message);
       });
-    axios.post('http://localhost:3010/events', event).catch((err) => {
+    axios.post('http://quary-srv:3010/events', event).catch((err) => {
         console.log(err.message);
       });
-    axios.post('http://localhost:3006/events', event).catch((err) => {
+    axios.post('http://moderation-srv:3006/events', event).catch((err) => {
         console.log(err.message);
       });
 
