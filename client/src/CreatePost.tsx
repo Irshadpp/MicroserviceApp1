@@ -5,7 +5,7 @@ const CreatePost = () => {
     const [title, setTitle] = useState('');
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        await axios.post('http://localhost:3000/posts',{
+        await axios.post('http://posts.com:3000/posts/create',{
             title
         });
         setTitle('');

@@ -9,7 +9,7 @@ const CreateComment:React.FC<PostProps> = ({postId}) => {
     const [content, setContent] = useState('');
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault();
-        await axios.post(`http://localhost:3001/posts/${postId}/comments`,{
+        await axios.post(`http://posts.com:3001/posts/${postId}/comments`,{
             content
         })
     }

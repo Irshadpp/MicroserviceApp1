@@ -19,7 +19,7 @@ const ListPost: React.FC = () => {
     const [posts, setPosts] = useState<PostsResponse>({});
     const fetchPost = async() =>{
         try {
-            const res = await axios.get<PostsResponse>("http://localhost:3010/posts");
+            const res = await axios.get<PostsResponse>("http://posts.com:3010/posts");
             console.log(res.data)
             setPosts(res.data);
         } catch (error) {
